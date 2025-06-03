@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from './../assets/images/Logo.png';
 import './../styles/Header.css';
 
-const API_BASE_URL = 'http://192.168.0.104:5000';
+const API_BASE_URL = 'https://lng-project.onrender.com';
 const DEFAULT_AVATAR = 'https://api.dicebear.com/9.x/pixel-art/svg?seed=AMRUTA';
 
 const Header = () => {
