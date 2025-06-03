@@ -36,48 +36,47 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'Passwords do not match' });
     }
 
+    // Check if already registered
     const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+
+    if (!existingUser) {
+      return res.status(400).json({ message: 'Please verify OTP first' });
+    }
+
+    if (!existingUser.verified) {
+      return res.status(400).json({ message: 'Email not verified. Complete OTP verification first.' });
+    }
+
+    if (existingUser.password) {
+      return res.status(400).json({ message: 'User already registered' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // ✅ Ensure username is never null
     const username = (fullName && fullName.trim()) || email.split('@')[0];
 
-    const newUser = new User({
-      email,
-      password: hashedPassword,
-      verified: true,
-      username,
-      friends: [],
-    });
+    existingUser.password = hashedPassword;
+    existingUser.username = username;
 
-    // ✅ Handle invitation
+    // Invitation handling
     if (inviteFrom) {
       const inviter = await User.findById(inviteFrom);
       if (inviter) {
-        // Update invite status if it exists
         const invite = inviter.invites?.find(inv => inv.email === email);
         if (invite) {
           invite.status = 'accepted';
         }
 
-        // Add each other as friends
-        if (!inviter.friends.includes(newUser._id)) {
-          inviter.friends.push(newUser._id);
+        if (!inviter.friends.includes(existingUser._id)) {
+          inviter.friends.push(existingUser._id);
         }
-        newUser.friends.push(inviter._id);
-
-        await inviter.save(); // Save inviter updates
+        existingUser.friends.push(inviter._id);
+        await inviter.save();
       }
     }
 
-    await newUser.save(); // Save new user
+    await existingUser.save();
 
     res.status(200).json({ message: 'User registered successfully' });
-
   } catch (error) {
     console.error('Register error:', error);
     res.status(500).json({ message: 'Server error' });
