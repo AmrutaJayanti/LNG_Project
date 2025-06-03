@@ -29,7 +29,7 @@ router.post('/verifyotp', verifyOtp)
 
 router.post('/register', async (req, res) => {
   try {
-    const { fullName, email, password, confirmpassword, inviteFrom } = req.body;
+    let { fullName, email, password, confirmpassword, inviteFrom } = req.body;
   
     if (!email || !password || !confirmpassword) {
       return res.status(400).json({ message: 'All fields are required' });
