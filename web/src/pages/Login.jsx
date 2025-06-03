@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './../styles/styles.css'; // make sure this is included
 
-const API_BASE_URL = 'https://lng-project.onrender.com';
+const API_BASE_URL = 'https://lng-project-1.onrender.com';
 
 const Login = () => {
   const [email, setEmail] = useState('');
