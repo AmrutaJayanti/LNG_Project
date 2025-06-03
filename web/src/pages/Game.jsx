@@ -108,7 +108,7 @@ const Game = () => {
 
     const username = result.value;
     setPlayerName(username);
-    const newSocket = io("http://localhost:5000", { autoConnect: true });
+    const newSocket = io("https://lng-project.onrender.com", { autoConnect: true });
 
     newSocket?.emit("request_to_play", { playerName: username });
     setSocket(newSocket);
