@@ -12,7 +12,7 @@ const Chat = () => {
   const messageRef = useRef(null);
 
   useEffect(() => {
-    setSocket(io('https://lng-project.onrender.com'));
+    setSocket(io('https://lng-project-1.onrender.com'));
   }, []);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Chat = () => {
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem('user:detail'));
     const fetchConversations = async () => {
-      const res = await fetch(`https://lng-project.onrender.com/api/conversations/${loggedInUser?.id}`);
+      const res = await fetch(`https://lng-project-1.onrender.com/api/conversations/${loggedInUser?.id}`);
       const resData = await res.json();
       setConversations(resData);
     };
@@ -43,7 +43,7 @@ const Chat = () => {
   }, []);
 
   const fetchMessages = async (conversationId, receiver) => {
-    const res = await fetch(`https://lng-project.onrender.com/api/message/${conversationId}?senderId=${user?.id}&&receiverId=${receiver?.receiverId}`);
+    const res = await fetch(`https://lng-project-1.onrender.com/api/message/${conversationId}?senderId=${user?.id}&&receiverId=${receiver?.receiverId}`);
     const resData = await res.json();
     setMessages({ messages: resData, receiver, conversationId });
   };
@@ -57,7 +57,7 @@ const Chat = () => {
       conversationId: messages?.conversationId
     });
 
-    await fetch(`https://lng-project.onrender.com/api/message`, {
+    await fetch(`https://lng-project-1.onrender.com/api/message`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
