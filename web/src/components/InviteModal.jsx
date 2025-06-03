@@ -14,7 +14,7 @@ const InviteModal = ({ onClose }) => {
     setError('');
 
     try {
-      const res = await fetch('https://lng-project.onrender.com/auth/invite', {
+      const res = await fetch('https://lng-project-1.onrender.com/auth/invite', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
