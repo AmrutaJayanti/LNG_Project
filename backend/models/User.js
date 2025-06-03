@@ -34,8 +34,7 @@ const userSchema = new mongoose.Schema({
   },
   username: { // Added for user identification in the UI
     type: String,
-    required: false,
-    unique: true,
+    required: false
   },
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Array of friend IDs
   invites: [inviteSchema], // Array of invites (pending, accepted, or rejected)
