@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './../styles/styles.css';
 
-const API_BASE_URL = 'https://lng-project.onrender.com';
+const API_BASE_URL = 'https://lng-project-1.onrender.com';
 
 const Register = () => {
   const navigate = useNavigate();
