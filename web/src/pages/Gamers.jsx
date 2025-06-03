@@ -6,7 +6,7 @@ const Gamers = ({ currentUser }) => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch(`http://localhost:5000/api/gamers/${currentUser?.id}`);
+      const res = await fetch(`https://lng-project.onrender.com/api/gamers/${currentUser?.id}`);
       const resData = await res.json();
       setUsers(resData);
     };
