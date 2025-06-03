@@ -32,10 +32,12 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  username: { // Added for user identification in the UI
-    type: String,
-    required: false
-  },
+  username: {
+  type: String,
+  unique: true,     // Enforces uniqueness
+  sparse: true,     // ✅ Allows multiple null/undefined values
+  required: false
+},
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Array of friend IDs
   invites: [inviteSchema], // Array of invites (pending, accepted, or rejected)
 });
