@@ -30,11 +30,11 @@ router.post('/verifyotp', verifyOtp)
 router.post('/register', async (req, res) => {
   try {
     const { fullName, email, password, confirmpassword, inviteFrom } = req.body;
-
-    if (!fullName || !email || !password || !confirmpassword) {
+  
+    if (!email || !password || !confirmpassword) {
       return res.status(400).json({ message: 'All fields are required' });
     }
-
+      if (!fullName) fullName = email.split('@')[0];
     if (password !== confirmpassword) {
       return res.status(400).json({ message: 'Passwords do not match' });
     }
